@@ -6,8 +6,8 @@ This project builds an end-to-end **Aadhaar document classification system** usi
 1. **Stage 1 – Image Encoder (Vision Transformer)**  
    A pretrained Vision Transformer (from `timm`) extracts deep visual embeddings from Aadhaar card images.
 
-2. **Stage 2 – OCR + Feature-based Classifier (EasyOCR + XGBoost)**  
-   OCR text is extracted using **EasyOCR**, converted into handcrafted text features, and combined with image embeddings. An **XGBoost** classifier is trained on the concatenated features to produce high-accuracy predictions.
+2. **Stage 2 – OCR + Feature-based Classifier (Tesaract + XGBoost)**  
+   OCR text is extracted using **Tesaract**, converted into handcrafted text features, and combined with image embeddings. An **XGBoost** classifier is trained on the concatenated features to produce high-accuracy predictions.
 
 The notebook (`AIMLProject.ipynb`) contains the full pipeline: data loading, preprocessing, feature extraction, model training, evaluation, and single-image inference.
 
@@ -78,7 +78,7 @@ The notebook follows these logical steps:
    - Save or cache embeddings to avoid repeated computation
 
 4. **OCR Extraction (EasyOCR)**  
-   - Run EasyOCR on images (supports adding languages like 'hi' for Hindi)
+   - Run Tesaract on images (supports adding languages like 'hi' for Hindi)
    - Extract raw OCR text (joined lines)
 
 ## 5. Script Detection (OCR-Based Feature Engineering)
@@ -149,7 +149,7 @@ These script indicators are converted into numerical features and used by the cl
 9. **Inference / Predict Pipeline**  
    A `predict_pipeline(image_path)` function that:
    - Loads image, extracts ViT embedding
-   - Runs EasyOCR and computes text features
+   - Runs Tesaract and computes text features
    - Concatenates features and returns predicted label + probability
 
 ---
